@@ -82,25 +82,23 @@ mask2 = 255
 mask3 = 254
 mask4 = 0
 
-# Gateway:
+# Gateway
 gtw1 = 172
 gtw2 = 24
 gtw3 = 108
 gtw4 = 1
 
-# DNS Primário:
+# DNS Primário
 dns1_1 = 200
 dns1_2 = 20
 dns1_3 = 0
 dns1_4 = 18
 
-# DNS Primário:
-
+# DNS Primário
 dns2_1 = 200
 dns2_2 = 20
 dns2_3 = 10
 dns2_4 = 17
-
 
 # Converte o número para string e separa os dígitos
 oct4_str = str(oct4)
@@ -136,7 +134,6 @@ options.add_argument('--no-sandbox')  # Desabilita o sandboxing, necessário em 
 options.add_argument('--disable-dev-shm-usage')  # Usa /tmp em vez de /dev/shm para armazenamento de compartilhamento de memória (evita problemas de espaço em memória compartilhada)
 options.add_argument('--disable-extensions')  # Desabilita extensões, que podem interferir
 options.add_argument('--disable-infobars')  # Desabilita a barra de informações "Chrome is being controlled by automated test software"
-
 options.add_argument('--log-level=3')  # Configura o Chrome para suprimir a maioria dos logs
 
 # Inicializa o navegador em modo headless
