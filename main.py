@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-import signal
-import subprocess
+
 import platform
 import time
 import pyfiglet
+import signal
+import subprocess
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
@@ -14,6 +15,9 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from datetime import datetime
 from art import text2art
+from config import ROUTER_ADMIN_URL, ROUTER_ADMIN_PASSWORD, SSID_MANAGEMENT_PASSWORD, \
+                    SSID_NAME_2G, SSID_NAME_5G, SUBNET_MASK, DEFAULT_GATEWAY, \
+                    PRIMARY_DNS, SECONDARY_DNS, ISOLATION_GROUP_NAME
 
 # Encerrando processos do chromedriver ou navegador chrome
 def close_chrome_processes():
@@ -75,7 +79,7 @@ print("Aguarde, o ambiente está sendo configurado...")
 oct1 = 172
 oct2 = 24
 oct3 = 108
-oct4 = numero # Capturado com base no que o usuário digitou
+oct4 = numero # A variável número será o valor apturado com base no que o usuário digitou
 
 # IP formatado
 ip = f"{oct1}.{oct2}.{oct3}.{oct4}"
@@ -143,21 +147,21 @@ options.add_argument('--disable-infobars')  # Desabilita a barra de informaçõe
 navegador = webdriver.Chrome(service=servico, options=options)
 
 try:
-    navegador.get('http://192.168.0.1/')
-    print("URL 192.168.0.1 acessada com sucesso.")
+    navegador.get(f"http://{ROUTER_ADMIN_URL}/")
+    print(f"'{ROUTER_ADMIN_URL}' acessado com sucesso.")
 
     time.sleep(0.2)
 
     WebDriverWait(navegador, 2).until(
         EC.presence_of_element_located((By.XPATH, '//*[@id="pc-setPwd-new"]'))
-    ).send_keys('123456')
+    ).send_keys(f'{ROUTER_ADMIN_PASSWORD}')
     print("Senha preenchida com sucesso no primeiro campo.")
 
     time.sleep(0.2)
 
     WebDriverWait(navegador, 20).until(
         EC.presence_of_element_located((By.XPATH, '//*[@id="pc-setPwd-confirm"]'))
-    ).send_keys('123456')
+    ).send_keys(f'{ROUTER_ADMIN_PASSWORD}')
     print("Senha preenchida com sucesso no segundo campo.")
 
     time.sleep(0.2)
@@ -275,9 +279,9 @@ try:
 
     time.sleep(0.2)
 
-    print("Tentando acessar 192.168.0.1 ...")
-    navegador.get('http://192.168.0.1/')
-    print("Acesso à 192.168.0.1 realizado novamente com sucesso.")
+    print(f"Tentando acessar {ROUTER_ADMIN_URL}")
+    navegador.get(f"http://{ROUTER_ADMIN_URL}/")
+    print(f"Acesso à {ROUTER_ADMIN_URL} realizado novamente com sucesso.")
 
     time.sleep(0.2)
 
@@ -384,9 +388,9 @@ try:
 
     time.sleep(0.2)   
     
-    print("Tentando acessar 192.168.0.1 ...")
-    navegador.get('http://192.168.0.1/')
-    print("Acesso à 192.168.0.1 realizado novamente com sucesso.")
+    print(f"Tentando acessar {ROUTER_ADMIN_URL}")
+    navegador.get(f"http://{ROUTER_ADMIN_URL}/")
+    print(f"Acesso à {ROUTER_ADMIN_URL} realizado novamente com sucesso.")
 
     time.sleep(0.2)   
 
@@ -449,7 +453,7 @@ try:
     element = WebDriverWait(navegador, 20).until(
         EC.presence_of_element_located((By.XPATH, '//*[@id="passwd_vap0_2g"]'))
     )
-    element.send_keys('123dsadsa')  # Coloca texto SSID de gerência
+    element.send_keys(f'{SSID_MANAGEMENT_PASSWORD}')  # Coloca texto SSID de gerência
     print("Senha de SSID de gerência adcionado com sucesso.")
 
     time.sleep(0.2)   
@@ -461,9 +465,9 @@ try:
 
     time.sleep(0.2)   
 
-    print("Tentando acessar 192.168.0.1 ...")
-    navegador.get('http://192.168.0.1/')
-    print("Acesso à 192.168.0.1 realizado novamente com sucesso.")
+    print(f"Tentando acessar {ROUTER_ADMIN_URL}")
+    navegador.get(f"http://{ROUTER_ADMIN_URL}/")
+    print(f"Acesso à {ROUTER_ADMIN_URL} realizado novamente com sucesso.")
 
     time.sleep(0.2)   
 
@@ -510,7 +514,7 @@ try:
     element = WebDriverWait(navegador, 20).until(
         EC.presence_of_element_located((By.XPATH, '//*[@id="ssid"]'))
     )
-    element.send_keys('eduroam') # Colocar SSID texto "eduroam"
+    element.send_keys(f'{SSID_NAME_2G}') # Colocar SSID texto "eduroam"
     print("Texto SSID 'eduroam' adcionado.")
 
     time.sleep(0.2)   
@@ -539,8 +543,8 @@ try:
 
     time.sleep(0.2)   
 
-    print("Tentando acessar 192.168.0.1 ...")
-    navegador.get('http://192.168.0.1/')
+    print(f"Tentando acessar {ROUTER_ADMIN_URL}")
+    navegador.get(f"http://{ROUTER_ADMIN_URL}/")
     print("Página acessada com sucesso.")
 
     time.sleep(0.2)   
@@ -596,7 +600,7 @@ try:
     element = WebDriverWait(navegador, 20).until(
         EC.presence_of_element_located((By.XPATH, '//*[@id="ssid"]'))
     )
-    element.send_keys('eduroam') # Colocar SSID texto "eduroam"
+    element.send_keys(f'{SSID_NAME_5G}') # Colocar SSID texto "eduroam"
     print("Texto SSID 'eduroam' colocado.")
 
     time.sleep(0.2)   
@@ -625,8 +629,8 @@ try:
 
     time.sleep(0.2)   
 
-    print("Tentando acessar 192.168.0.1 ...")
-    navegador.get('http://192.168.0.1/')
+    print(f"Tentando acessar {ROUTER_ADMIN_URL}")
+    navegador.get(f"http://{ROUTER_ADMIN_URL}/")
     print("Página acessada com sucesso.")
 
     time.sleep(0.2)   
@@ -679,8 +683,8 @@ try:
 
     time.sleep(3)
 
-    print("Tentando acessar 192.168.0.1 ...")
-    navegador.get('http://192.168.0.1/')
+    print(f"Tentando acessar {ROUTER_ADMIN_URL}")
+    navegador.get(f"http://{ROUTER_ADMIN_URL}/")
     print("Página acessada com sucesso.")
 
     time.sleep(0.2)
@@ -765,8 +769,8 @@ try:
 
     time.sleep(0.2)
      
-    print("Tentando acessar 192.168.0.1 ...")
-    navegador.get('http://192.168.0.1/')
+    print(f"Tentando acessar {ROUTER_ADMIN_URL}")
+    navegador.get(f"http://{ROUTER_ADMIN_URL}/")
     print("Página acessada com sucesso.")
 
     time.sleep(0.2)       
@@ -1094,8 +1098,8 @@ try:
 
     time.sleep(0.2)   
 
-    print("Tentando acessar 192.168.0.1 ...")
-    navegador.get('http://192.168.0.1/')
+    print(f"Tentando acessar {ROUTER_ADMIN_URL}")
+    navegador.get(f"http://{ROUTER_ADMIN_URL}/")
     print("Página acessada com sucesso.")
 
     time.sleep(0.2)
@@ -1210,8 +1214,8 @@ try:
     print(f"Tempo total gasto: {total_time:.2f} segundos")
 
     '''
-    print("Tentando acessar 192.168.0.1 ...")
-    navegador.get('http://192.168.0.1/')
+    print(f"Tentando acessar {ROUTER_ADMIN_URL}")
+    navegador.get(f"http://{ROUTER_ADMIN_URL}/")
     print("Página acessada com sucesso.")
     '''
 
