@@ -7,7 +7,7 @@ Este script foi desenvolvido para automatizar a configuração do Roteador Wirel
 - **Configuração Automática de IP**: Define endereçamento IP estático ou dinâmico.
 - **Configuração de SSID**: Permite a definição do nome da rede Wi-Fi para ambas as bandas (2.4 GHz e 5 GHz).
 - **Configuração de Senha**: Define a senha de acesso à rede Wi-Fi.
-- **Automação de Tarefas Repetitivas**: Automatiza passos manuais, economizando tempo durante a configuração inicial.
+- **Automação de Tarefas Repetitivas**: Automatiza passos manuais, economizando tempo durante a configuração inicial e, evitando assim, possíveis erros.
 
 ## Pré-requisitos
 
