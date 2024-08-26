@@ -874,7 +874,7 @@ try:
         EC.presence_of_element_located((By.XPATH, '//*[@id="ip_basic_v4"]/div[1]/div/div[1]/input[1]')) 
     )
     element.send_keys(Keys.NUMPAD1 + Keys.NUMPAD7 + Keys.NUMPAD2)
-    print(f"Inserido{oct1}")
+    print(f"Inserido {oct1}")
 
     time.sleep(0.2)   
 
@@ -882,7 +882,7 @@ try:
         EC.presence_of_element_located((By.XPATH, '//*[@id="ip_basic_v4"]/div[1]/div/div[1]/input[2]'))
     )
     element.send_keys(Keys.NUMPAD2 + Keys.NUMPAD4 + Keys.TAB) 
-    print(f"Inserido{oct2}")
+    print(f"Inserido {oct2}")
 
     time.sleep(0.2)   
 
@@ -890,7 +890,7 @@ try:
         EC.presence_of_element_located((By.XPATH, '//*[@id="ip_basic_v4"]/div[1]/div/div[1]/input[3]'))
     )
     element.send_keys(Keys.NUMPAD1 + Keys.NUMPAD0 + Keys.NUMPAD8) 
-    print(f"Inserido{oct3}")
+    print(f"Inserido {oct3}")
 
     time.sleep(0.2) 
 
@@ -898,7 +898,7 @@ try:
         EC.presence_of_element_located((By.XPATH, '//*[@id="ip_basic_v4"]/div[1]/div/div[1]/input[4]'))
     )
     element.send_keys(oct4) 
-    print(f"Inserido{oct4}")
+    print(f"Inserido {oct4}")
 
     time.sleep(0.2) 
 
@@ -916,7 +916,7 @@ try:
         EC.presence_of_element_located((By.XPATH, '//*[@id="ip_basic_v4"]/div[2]/div/div[1]/input[1]'))
     )
     element.send_keys(mask1) 
-    print(f"Inserido {mask1}.")
+    print(f"Inserido {mask1}")
 
     time.sleep(0.2)   
 
@@ -924,7 +924,7 @@ try:
         EC.presence_of_element_located((By.XPATH, '//*[@id="ip_basic_v4"]/div[2]/div/div[1]/input[2]'))
     )
     element.send_keys(mask2) 
-    print(f"Inserido {mask2}.")
+    print(f"Inserido {mask2}")
 
     time.sleep(0.2)   
 
@@ -932,7 +932,7 @@ try:
         EC.presence_of_element_located((By.XPATH, '//*[@id="ip_basic_v4"]/div[2]/div/div[1]/input[3]'))
     )
     element.send_keys(mask3) 
-    print(f"Inserido {mask3}.")
+    print(f"Inserido {mask3}")
 
     time.sleep(0.2)   
 
@@ -940,7 +940,7 @@ try:
         EC.presence_of_element_located((By.XPATH, '//*[@id="ip_basic_v4"]/div[2]/div/div[1]/input[4]'))
     )
     element.send_keys(mask4) 
-    print(f"Inserido {mask4}.")
+    print(f"Inserido {mask4}")
 
     time.sleep(0.2)  
 
@@ -957,7 +957,7 @@ try:
         EC.presence_of_element_located((By.XPATH, '//*[@id="ip_basic_v4"]/div[3]/div/div[1]/input[1]'))
     )
     element.send_keys(gtw1) 
-    print(f"Inserido {gtw1}.")
+    print(f"Inserido {gtw1}")
 
     time.sleep(0.2)   
 
@@ -965,7 +965,7 @@ try:
         EC.presence_of_element_located((By.XPATH, '//*[@id="ip_basic_v4"]/div[3]/div/div[1]/input[2]'))
     )
     element.send_keys(gtw2) 
-    print(f"Inserido {gtw2}.")
+    print(f"Inserido {gtw2}")
 
     time.sleep(0.2)   
 
@@ -981,7 +981,7 @@ try:
         EC.presence_of_element_located((By.XPATH, '//*[@id="ip_basic_v4"]/div[3]/div/div[1]/input[3]'))
     )
     element.send_keys(gtw3) 
-    print(f"Inserido {gtw3}.")
+    print(f"Inserido {gtw3}")
 
     time.sleep(0.2)   
 
@@ -989,7 +989,7 @@ try:
         EC.presence_of_element_located((By.XPATH, '//*[@id="ip_basic_v4"]/div[3]/div/div[1]/input[4]'))
     )
     element.send_keys(gtw4) 
-    print(f"Inserido {gtw4}.")
+    print(f"Inserido {gtw4}")
 
     time.sleep(0.2)   
 
@@ -1007,7 +1007,7 @@ try:
         EC.presence_of_element_located((By.XPATH, '//*[@id="ip_basic_v4"]/div[4]/div/div[1]/input[1]'))
     )
     element.send_keys(dns1_1) 
-    print(f"Inserido {dns1_1}.")
+    print(f"Inserido {dns1_1}")
 
     time.sleep(0.2) 
 
@@ -1015,7 +1015,7 @@ try:
         EC.presence_of_element_located((By.XPATH, '//*[@id="ip_basic_v4"]/div[4]/div/div[1]/input[2]'))
     )
     element.send_keys(dns1_2) 
-    print(f"Inserido {dns1_2}.")
+    print(f"Inserido {dns1_2}")
 
     time.sleep(0.2)   
 
@@ -1023,7 +1023,7 @@ try:
         EC.presence_of_element_located((By.XPATH, '//*[@id="ip_basic_v4"]/div[4]/div/div[1]/input[3]'))
     )
     element.send_keys(dns1_3) 
-    print(f"Inserido {dns1_3}.")
+    print(f"Inserido {dns1_3}")
 
     time.sleep(0.2) 
 
@@ -1031,7 +1031,7 @@ try:
         EC.presence_of_element_located((By.XPATH, '//*[@id="ip_basic_v4"]/div[4]/div/div[1]/input[4]'))
     )
     element.send_keys(dns1_4) 
-    print(f"Inserido {dns1_4}.")
+    print(f"Inserido {dns1_4}")
 
     time.sleep(0.2)
 
@@ -1049,7 +1049,7 @@ try:
         EC.presence_of_element_located((By.XPATH, '//*[@id="ip_basic_v4"]/div[5]/div/div[1]/input[1]'))
     )
     element.send_keys(dns2_1) 
-    print(f"Inserido {dns2_1}.")
+    print(f"Inserido {dns2_1}")
 
     time.sleep(0.2)
 
@@ -1057,7 +1057,7 @@ try:
         EC.presence_of_element_located((By.XPATH, '//*[@id="ip_basic_v4"]/div[5]/div/div[1]/input[2]'))
     )
     element.send_keys(dns2_2) 
-    print(f"Inserido {dns2_2}.")
+    print(f"Inserido {dns2_2}")
 
     time.sleep(0.2)
 
@@ -1065,7 +1065,7 @@ try:
         EC.presence_of_element_located((By.XPATH, '//*[@id="ip_basic_v4"]/div[5]/div/div[1]/input[3]'))
     )
     element.send_keys(dns2_3) 
-    print(f"Inserido {dns2_3}.")
+    print(f"Inserido {dns2_3}")
 
     time.sleep(0.2)
 
@@ -1073,7 +1073,7 @@ try:
         EC.presence_of_element_located((By.XPATH, '//*[@id="ip_basic_v4"]/div[5]/div/div[1]/input[4]'))
     )
     element.send_keys(dns2_4) 
-    print(f"Inserido {dns2_4}.")
+    print(f"Inserido {dns2_4}")
 
     time.sleep(0.2)
 
