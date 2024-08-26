@@ -18,4 +18,3 @@ Antes de utilizar o script, certifique-se de que você tenha:
 
   ```bash
   pip install -r requirements.txt
-
