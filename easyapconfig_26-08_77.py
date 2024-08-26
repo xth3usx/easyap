@@ -1225,22 +1225,24 @@ try:
     dados_para_copiar = f"{etiqueta}\t{ssid1}\t{novo_ip}\t{nome_completo_ap}"
 
     # LOG - Formate a entrada de log
-    log_entry = (f"Data: {datetime.now()}, {etiqueta}, SSID de Gerencia: {ssid2}, {nome_completo_ap}, IP: {ip}, MAC: {mac}. \n")
+    log_entry = (f"Data: {datetime.now()}, {etiqueta}, SSID de Gerencia: {ssid2}, {nome_completo_ap}, IP: {ip}, MAC: {mac} \n")
 
     # Caminho do arquivo de log
     log_file_path = 'log.txt'
 
     # Abra o arquivo em modo de anexar e escreva a entrada de log
-    with open(log_file_path, 'a') as file:
+    with open(log_file_path, 'a', encoding='utf-8') as file:
         file.write(log_entry)
 
     print("Entrada de log registrada com sucesso.")
     print("Aguarde, gerando html...")
 
+    print("Aguarde, gerando html...")
+
     html_content = f"""
     <html>
     <head>
-        <title>Configuração Concluída</title>
+        <title>Configuração concluída com sucesso!</title>
         <style>
             body {{
                 font-family: Arial, sans-serif;
@@ -1248,7 +1250,7 @@ try:
                 color: #333;
                 display: flex;
                 justify-content: center;
-                align-items: center;  
+                align-items: flex-start;  /* Alinhar ao topo */
                 height: 100vh;
                 margin: 0;
                 zoom: 1.8;  
@@ -1260,10 +1262,12 @@ try:
                 box-shadow: 0 0 10px rgba(0,0,0,0.1);
                 max-width: 800px;
                 width: 100%;  /* Garantir que o container utilize toda a largura disponível */
-                text-align: center;  /* Centraliza o texto dentro do container */
+                text-align: center;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                margin-top: 20px; /* Menos margem superior para aproximar do topo */
+                margin-bottom: 20px; /* Margem inferior para adicionar espaço no final */
             }}
             h1 {{
                 color: #4CAF50;
@@ -1275,11 +1279,11 @@ try:
                 text-align: left;
                 width: 100%;  /* Garantir que o texto ocupe toda a largura do container */
             }}
-            .info-box {{
+            .card {{
                 background-color: #e0e0e0;
                 border: 1px solid #ddd;
                 border-radius: 8px;
-                padding: 15px;
+                padding: 20px;
                 margin: 10px;
                 width: 80%;
                 max-width: 600px;
@@ -1287,11 +1291,12 @@ try:
                 font-weight: bold;
                 color: #333;
                 text-align: center;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             }}
             .highlight {{
                 background-color: #FF5733;
                 color: #fff;
-                padding: 15px;
+                padding: 20px;
                 border-radius: 8px;
                 margin-top: 20px;
                 width: 80%;
@@ -1323,12 +1328,12 @@ try:
     </head>
     <body>
         <div class="container">
-            <h1>Configuração Concluída com Sucesso!</h1>
+            <h1>Configuração da primeira etapa concluída com sucesso!</h1>
             <p><span class="step-number">1</span> Desconectar o cabo da porta LAN.</p>
             <p><span class="step-number">2</span> Conectar o cabo com acesso à internet na porta WAN.</p>
             <p><span class="step-number">3</span> Para concluir a última etapa:</p>
-            <div class="info-box">{ip}</div>
-            <div class="info-box">{mac}</div>
+            <div class="card">{ip}</div>
+            <div class="card">{mac}</div>
             <div class="highlight">Tempo Gasto: {formatted_time}</div>
         </div>
     </body>
