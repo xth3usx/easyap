@@ -1,8 +1,8 @@
-#/////////////////// Parâmetros de Configuração ///////////////////#
+# Parâmetros de Configuração
 
 # Acesso Inicial
 ROUTER_ADMIN_URL = '192.168.0.1'
-ROUTER_ADMIN_PASSWORD = '12345678' # Mínimo de 8 caracteres
+ROUTER_ADMIN_PASSWORD = '12345678'
 
 # Multi-SSID
 SSID_MANAGEMENT_PASSWORD = '12345678' # Mínimo de 8 caracteres (P/ criptografia AES)

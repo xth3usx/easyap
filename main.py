@@ -15,10 +15,11 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from datetime import datetime
 from art import text2art
+from html import gerar_html
 from config import ROUTER_ADMIN_URL, ROUTER_ADMIN_PASSWORD, SSID_MANAGEMENT_PASSWORD, \
                     SSID_NAME_2G, SSID_NAME_5G, SUBNET_MASK, DEFAULT_GATEWAY, \
                     PRIMARY_DNS, SECONDARY_DNS, ISOLATION_GROUP_NAME
-from html import gerar_html
+
 
 # Encerrando processos do chromedriver ou navegador chrome
 def close_chrome_processes():
@@ -1235,7 +1236,7 @@ try:
     end_time = time.time()
     total_time = end_time - start_time
     minutes, seconds = divmod(int(total_time), 60)
-    formatted_time = f"{minutes} minutos e {seconds} segundos"
+    ftime = f"{minutes} minutos e {seconds} segundos"
 
     # Preparar os dados para serem copiados de uma vez, separados por tabulações (\t)
     dados_para_copiar = f"{etiqueta}\t{ssid1}\t{novo_ip}\t{nome_completo_ap}"
@@ -1255,10 +1256,10 @@ try:
 
     # Injetando o conteúdo HTML diretamente no navegador
     #navegador.execute_script(f"document.write({repr(html_content)});")
-    navegador.execute_script(f"document.write({repr(gerar_html(ip,mac,formatted_time))});")
+    navegador.execute_script(f"document.write({repr(gerar_html(ip,mac,ftime))});")
 
 finally:
     print("O navegador já pode ser fechado.")
-    time.sleep(60)   
+    time.sleep(100)   
     navegador.quit()
     print("Navegador fechado.")

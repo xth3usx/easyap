@@ -1,6 +1,6 @@
 # Gerador do HTML de confirmação da conclusão
-def gerar_html(ip,mac,formatted_time):
-    html_content = f"""
+def gerar_html(ip,mac,ftime):
+    html = f"""
             <html>
             <head>
                 <title>Configuração concluída com sucesso!</title>
@@ -91,16 +91,16 @@ def gerar_html(ip,mac,formatted_time):
                 <div class="container">
                     <h1>Configuração da primeira etapa concluída com sucesso!</h1>
                     <p>Para concluir a última etapa:</p>
-                    <p><span class="step-number">1</span> Desconectar o cabo da porta LAN.</p>
-                    <p><span class="step-number">2</span> Conectar o cabo com acesso à internet na porta WAN.</p>
-                    <p><span class="step-number">2</span> Acessar página com o seguinte ip:.</p>
+                    <p><span class="step-number">1</span> Desconecte o cabo de rede da porta LAN do dispositivo.</p>
+                    <p><span class="step-number">2</span> Conecte o cabo de internet à porta WAN do roteador.</p>
+                    <p><span class="step-number">2</span> Acesse a página do roteador usando o endereço IP fornecido e, após o login, desative o serviço DHCP.</p>
                     
                     <div class="card">{ip}</div>
                     <div class="card">{mac}</div>
-                    <div class="highlight">Tempo Gasto: {formatted_time}</div>
+                    <div class="highlight">Tempo Gasto: {ftime}</div>
                 </div>
             </body>
             </html>
             """
-    return html_content
+    return html
   
