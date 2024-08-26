@@ -100,7 +100,7 @@ if len(mask) == 4:
     mask11, mask22, mask33, mask44 = [int(mask) for mask in mask]
     
     # Verificar se cada octeto está no intervalo válido (0 a 255)
-    if all(0 <= mask <= 255 for mask in [mask1, mask2, mask3, mask4]):
+    if all(0 <= mask <= 255 for mask in [mask11, mask22, mask33, mask44]):
         print(f"Máscara de sub-rede capturada:")
         print(f"Octeto 1: {mask11}")
         print(f"Octeto 2: {mask22}")
