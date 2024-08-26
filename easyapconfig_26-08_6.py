@@ -12,6 +12,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
+from datetime import datetime
 from art import text2art
 
 # Encerrando processos do chromedriver ou navegador chrome
@@ -32,6 +33,10 @@ sti_art = pyfiglet.figlet_format("STI", font="slant")
 
 # Exibindo o texto estilizado
 print(sti_art)
+
+start_time = time.time()
+start_local_time = time.localtime(start_time)
+print(f"Início: {time.strftime('%H:%M:%S', start_local_time)}")
 
 # Capturando informações do usuário
 def gerar_identificador():
@@ -64,10 +69,6 @@ def gerar_identificador():
 numero, etiqueta, ssid1, ssid2, novo_ip, nome_completo_ap = gerar_identificador()
 
 # Impressão de infomações básicas de configuração
-print(etiqueta)
-print(ssid1)
-print(novo_ip)
-print(nome_completo_ap)
 print("Aguarde, o ambiente está sendo configurado...")
 
 # Defina os octetos do IP
@@ -137,16 +138,9 @@ options.add_argument('--no-sandbox')  # Desabilita o sandboxing, necessário em 
 options.add_argument('--disable-dev-shm-usage')  # Usa /tmp em vez de /dev/shm para armazenamento de compartilhamento de memória (evita problemas de espaço em memória compartilhada)
 options.add_argument('--disable-extensions')  # Desabilita extensões, que podem interferir
 options.add_argument('--disable-infobars')  # Desabilita a barra de informações "Chrome is being controlled by automated test software"
-options.add_argument('--log-level=3')  # Configura o Chrome para suprimir a maioria dos logs
 
 # Inicializa o navegador em modo headless
 navegador = webdriver.Chrome(service=servico, options=options)
-
-service_log_path = "chromedriver.log"  # Caminho para salvar os logs do ChromeDriver
-
-start_time = time.time()
-start_local_time = time.localtime(start_time)
-print(f"Início: {time.strftime('%H:%M:%S', start_local_time)}")
 
 try:
     navegador.get('http://192.168.0.1/')
@@ -176,7 +170,6 @@ try:
 
     time.sleep(0.2)
 
-
     element = WebDriverWait(navegador, 40).until(
         EC.element_to_be_clickable((By.XPATH, '//*[@id="advanced"]/span[2]'))
     )
@@ -195,10 +188,26 @@ try:
     # Verifique se o valor não está vazio
     if mac:
         # Formatar o texto com um destaque mais elaborado
-        destaque = f"############################\n \n \n {mac} \n {ip} \n \n \n############################"
+        destaque = f"""
+    ############################################################################
+
+    **ATENÇÃO!** Enquanto o script está sendo processado, não se esqueça de:
+
+    1. Fixar a etiqueta de identificação no aparelho.
+    2. Copiar e colar os dados na planilha de controle.
+
+    {etiqueta}
+    SSID de Gerência: {ssid2}
+    {nome_completo_ap}
+    IP: {ip} 
+    MAC: {mac}
+
+    ############################################################################
+    """
         print(destaque)
     else:
         print("O elemento não contém valor.")
+
 
     time.sleep(0.2)
 
@@ -1200,10 +1209,11 @@ try:
     total_time = end_time - start_time
     print(f"Tempo total gasto: {total_time:.2f} segundos")
 
+    '''
     print("Tentando acessar 192.168.0.1 ...")
     navegador.get('http://192.168.0.1/')
     print("Página acessada com sucesso.")
-    print("Aguarde, gerando html...")
+    '''
 
     # Criando uma página HTML para exibir no navegador
     end_time = time.time()
@@ -1213,6 +1223,19 @@ try:
 
     # Preparar os dados para serem copiados de uma vez, separados por tabulações (\t)
     dados_para_copiar = f"{etiqueta}\t{ssid1}\t{novo_ip}\t{nome_completo_ap}"
+
+    # LOG - Formate a entrada de log
+    log_entry = (f"Data: {datetime.now()}, {etiqueta}, SSID de Gerencia: {ssid2}, {nome_completo_ap}, IP: {ip}, MAC: {mac}. \n")
+
+    # Caminho do arquivo de log
+    log_file_path = 'log.txt'
+
+    # Abra o arquivo em modo de anexar e escreva a entrada de log
+    with open(log_file_path, 'a') as file:
+        file.write(log_entry)
+
+    print("Entrada de log registrada com sucesso.")
+    print("Aguarde, gerando html...")
 
     html_content = f"""
     <html>
@@ -1225,50 +1248,56 @@ try:
                 color: #333;
                 display: flex;
                 justify-content: center;
-                align-items: center;  /* Centralizar a div no centro da tela */
+                align-items: center;  
                 height: 100vh;
                 margin: 0;
-                zoom: 1.8;  /* Zoom de 180% */
+                zoom: 1.8;  
             }}
             .container {{
                 background-color: #fff;
                 padding: 20px;
                 border-radius: 8px;
                 box-shadow: 0 0 10px rgba(0,0,0,0.1);
-                text-align: left;
                 max-width: 800px;
-                margin: auto;
-                position: relative;  /* Para ajuste do posicionamento */
-                top: -50px;  /* Subir a div em relação ao centro da tela */
+                width: 100%;  /* Garantir que o container utilize toda a largura disponível */
+                text-align: center;  /* Centraliza o texto dentro do container */
+                display: flex;
+                flex-direction: column;
+                align-items: center;
             }}
             h1 {{
                 color: #4CAF50;
-                text-align: center;
+                margin-bottom: 20px;
             }}
             p {{
                 font-size: 16px;
                 margin: 10px 0;
+                text-align: left;
+                width: 100%;  /* Garantir que o texto ocupe toda a largura do container */
             }}
-            a {{
-                display: inline-block;
-                margin-top: 5px;
-                padding: 10px 20px;
-                background-color: #4CAF50;
-                color: #fff;
-                text-decoration: none;
-                border-radius: 5px;
+            .info-box {{
+                background-color: #e0e0e0;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                padding: 15px;
+                margin: 10px;
+                width: 80%;
+                max-width: 600px;
+                font-size: 20px;
+                font-weight: bold;
+                color: #333;
                 text-align: center;
-                cursor: pointer;
-            }}
-            a:hover {{
-                background-color: #45a049;
             }}
             .highlight {{
-                font-size: 18px;
-                font-weight: bold;
-                color: #FF5733;
+                background-color: #FF5733;
+                color: #fff;
+                padding: 15px;
+                border-radius: 8px;
                 margin-top: 20px;
-                text-align: center;
+                width: 80%;
+                max-width: 600px;
+                font-size: 20px;
+                font-weight: bold;
             }}
             .step-number {{
                 display: inline-block;
@@ -1297,11 +1326,9 @@ try:
             <h1>Configuração Concluída com Sucesso!</h1>
             <p><span class="step-number">1</span> Desconectar o cabo da porta LAN.</p>
             <p><span class="step-number">2</span> Conectar o cabo com acesso à internet na porta WAN.</p>
-            <p><span class="step-number">3</span> Para concluir a última etapa, clique no botão abaixo para copiar a URL:</p>
-            <a href="javascript:void(0);" onclick="copyToClipboard('http://172.24.108.{int(numero)}')">Copiar URL</a>
-            <hr>
-            <p>Clique no botão abaixo para copiar os dados:</p>
-            <a href="javascript:void(0);" onclick="copyToClipboard('{dados_para_copiar}')">Copiar Dados para Planilha</a>
+            <p><span class="step-number">3</span> Para concluir a última etapa:</p>
+            <div class="info-box">{ip}</div>
+            <div class="info-box">{mac}</div>
             <div class="highlight">Tempo Gasto: {formatted_time}</div>
         </div>
     </body>
