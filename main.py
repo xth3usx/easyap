@@ -92,6 +92,25 @@ oct4 = numero # A variável número será o valor apturado com base no que o usu
 # IP formatado
 ip = f"{oct1}.{oct2}.{oct3}.{oct4}"
 
+mask = SUBNET_MASK.split('.')
+
+# Verificar se a entrada possui exatamente 4 octetos
+if len(mask) == 4:
+    # Converter cada octeto para inteiro
+    mask11, mask22, mask33, mask44 = [int(mask) for mask in mask]
+    
+    # Verificar se cada octeto está no intervalo válido (0 a 255)
+    if all(0 <= mask <= 255 for mask in [mask1, mask2, mask3, mask4]):
+        print(f"Máscara de sub-rede capturada:")
+        print(f"Octeto 1: {mask11}")
+        print(f"Octeto 2: {mask22}")
+        print(f"Octeto 3: {mask33}")
+        print(f"Octeto 4: {mask44}")
+    else:
+        print("Cada octeto deve estar no intervalo de 0 a 255.")
+else:
+    print("Máscara de sub-rede inválida. Certifique-se de que está no formato xxx.xxx.xxx.xxx.")
+
 # Máscara de Sub-rede:
 mask1 = 255
 mask2 = 255
