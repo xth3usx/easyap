@@ -110,7 +110,7 @@ dns1_2 = 20
 dns1_3 = 0
 dns1_4 = 18
 
-# DNS Primário
+# DNS Secundário
 dns2_1 = 200
 dns2_2 = 20
 dns2_3 = 10
