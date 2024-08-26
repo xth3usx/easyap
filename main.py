@@ -18,6 +18,7 @@ from art import text2art
 from config import ROUTER_ADMIN_URL, ROUTER_ADMIN_PASSWORD, SSID_MANAGEMENT_PASSWORD, \
                     SSID_NAME_2G, SSID_NAME_5G, SUBNET_MASK, DEFAULT_GATEWAY, \
                     PRIMARY_DNS, SECONDARY_DNS, ISOLATION_GROUP_NAME
+from html import gerar_html
 
 # Encerrando processos do chromedriver ou navegador chrome
 def close_chrome_processes():
@@ -74,6 +75,12 @@ numero, etiqueta, ssid1, ssid2, novo_ip, nome_completo_ap = gerar_identificador(
 
 # Impressão de infomações básicas de configuração
 print("Aguarde, o ambiente está sendo configurado...")
+
+#SUBNET_MASK
+#DEFAULT_GATEWAY
+#PRIMARY_DNS
+#SECONDARY_DNS
+#ISOLATION_GROUP_NAME
 
 # Defina os octetos do IP
 oct1 = 172
@@ -453,17 +460,22 @@ try:
     element = WebDriverWait(navegador, 20).until(
         EC.presence_of_element_located((By.XPATH, '//*[@id="passwd_vap0_2g"]'))
     )
-    element.send_keys(f'{SSID_MANAGEMENT_PASSWORD}')  # Coloca texto SSID de gerência
+    element.send_keys(SSID_MANAGEMENT_PASSWORD)  # Coloca senha de SSID de gerência
     print("Senha de SSID de gerência adcionado com sucesso.")
 
     time.sleep(0.2)   
+
+    #element = WebDriverWait(navegador, 50).until(
+    #    EC.visibility_of_element_located((By.XPATH, '//*[@id="mssidSave_2g"]'))
+    #).click()
+    #print("Alterações salvas com sucesso.")
 
     element = WebDriverWait(navegador, 50).until(
         EC.visibility_of_element_located((By.XPATH, '//*[@id="mssidSave_2g"]'))
     ).click()
     print("Alterações salvas com sucesso.")
 
-    time.sleep(0.2)   
+    time.sleep(0.2)
 
     print(f"Tentando acessar {ROUTER_ADMIN_URL}")
     navegador.get(f"http://{ROUTER_ADMIN_URL}/")
@@ -1147,7 +1159,7 @@ try:
     element = WebDriverWait(navegador, 20).until(
         EC.presence_of_element_located((By.XPATH, '//*[@id="groupName"]')) # Adicionar um Novo Grupo
     )
-    element.send_keys("desabilitados") 
+    element.send_keys(f"{ISOLATION_GROUP_NAME}") 
     print("Adicionar um Novo Grupo.")
 
     time.sleep(0.2)
@@ -1241,111 +1253,9 @@ try:
     print("Entrada de log registrada com sucesso.")
     print("Aguarde, gerando html...")
 
-    print("Aguarde, gerando html...")
-
-    html_content = f"""
-    <html>
-    <head>
-        <title>Configuração concluída com sucesso!</title>
-        <style>
-            body {{
-                font-family: Arial, sans-serif;
-                background-color: #f4f4f4;
-                color: #333;
-                display: flex;
-                justify-content: center;
-                align-items: flex-start;  /* Alinhar ao topo */
-                height: 100vh;
-                margin: 0;
-                zoom: 1.8;  
-            }}
-            .container {{
-                background-color: #fff;
-                padding: 20px;
-                border-radius: 8px;
-                box-shadow: 0 0 10px rgba(0,0,0,0.1);
-                max-width: 800px;
-                width: 100%;  /* Garantir que o container utilize toda a largura disponível */
-                text-align: center;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                margin-top: 20px; /* Menos margem superior para aproximar do topo */
-                margin-bottom: 20px; /* Margem inferior para adicionar espaço no final */
-            }}
-            h1 {{
-                color: #4CAF50;
-                margin-bottom: 20px;
-            }}
-            p {{
-                font-size: 16px;
-                margin: 10px 0;
-                text-align: left;
-                width: 100%;  /* Garantir que o texto ocupe toda a largura do container */
-            }}
-            .card {{
-                background-color: #e0e0e0;
-                border: 1px solid #ddd;
-                border-radius: 8px;
-                padding: 20px;
-                margin: 10px;
-                width: 80%;
-                max-width: 600px;
-                font-size: 20px;
-                font-weight: bold;
-                color: #333;
-                text-align: center;
-                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            }}
-            .highlight {{
-                background-color: #FF5733;
-                color: #fff;
-                padding: 20px;
-                border-radius: 8px;
-                margin-top: 20px;
-                width: 80%;
-                max-width: 600px;
-                font-size: 20px;
-                font-weight: bold;
-            }}
-            .step-number {{
-                display: inline-block;
-                width: 25px;
-                height: 25px;
-                border-radius: 50%;
-                background-color: #4CAF50;
-                color: white;
-                text-align: center;
-                line-height: 25px;
-                margin-right: 10px;
-            }}
-        </style>
-        <script>
-            function copyToClipboard(text) {{
-                navigator.clipboard.writeText(text).then(function() {{
-                    alert('Dados copiados: ' + text);
-                }}, function(err) {{
-                    alert('Erro ao copiar dados: ' + err);
-                }});
-            }}
-        </script>
-    </head>
-    <body>
-        <div class="container">
-            <h1>Configuração da primeira etapa concluída com sucesso!</h1>
-            <p><span class="step-number">1</span> Desconectar o cabo da porta LAN.</p>
-            <p><span class="step-number">2</span> Conectar o cabo com acesso à internet na porta WAN.</p>
-            <p><span class="step-number">3</span> Para concluir a última etapa:</p>
-            <div class="card">{ip}</div>
-            <div class="card">{mac}</div>
-            <div class="highlight">Tempo Gasto: {formatted_time}</div>
-        </div>
-    </body>
-    </html>
-    """
-
     # Injetando o conteúdo HTML diretamente no navegador
-    navegador.execute_script(f"document.write({repr(html_content)});")
+    #navegador.execute_script(f"document.write({repr(html_content)});")
+    navegador.execute_script(f"document.write({repr(gerar_html(ip,mac,formatted_time))});")
 
 finally:
     print("O navegador já pode ser fechado.")
