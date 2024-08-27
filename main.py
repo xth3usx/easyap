@@ -20,6 +20,10 @@ from config import ROUTER_ADMIN_URL, ROUTER_ADMIN_PASSWORD, SSID_MANAGEMENT_PASS
                     SSID_NAME_2G, SSID_NAME_5G, SUBNET_MASK, DEFAULT_GATEWAY, \
                     PRIMARY_DNS, SECONDARY_DNS, ISOLATION_GROUP_NAME
 
+from config import URL_ADMIN_ROUTER, SENHA_ADMIN_ROUTER, SENHA_GESTAO_SSID, \
+                    NOME_SSID_2G, NOME_SSID_5G, MASCARA_SUBREDE, GATEWAY_PADRAO, \
+                    DNS_PRIMARIO, DNS_SECUNDARIO, NOME_GRUPO_ISOLAMENTO
+
 
 # Encerrando processos do chromedriver ou navegador chrome
 def close_chrome_processes():
