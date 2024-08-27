@@ -1,0 +1,16 @@
+# Configuração Automática do Roteador Wireless TP-Link AC750
+
+Este projeto consiste em um script de automação para configurar o roteador Wireless TP-Link AC750 utilizando o Selenium WebDriver. O script realiza configurações múltiplas para preparar o roteador para uso em ambientes corporativos ou pessoais, ajustando SSIDs, senhas, DHCP, IPs estáticos, e muito mais.
+
+## Requisitos
+
+- Python 3.8+
+- Selenium
+- WebDriver para Chrome (ChromeDriver)
+
+## Instalação
+
+Clone o repositório utilizando:
+
+```bash
+git clone https://seu-repositorio-aqui.git
