@@ -19,8 +19,7 @@ Siga as instruções abaixo para clonar o repositório e instalar as dependênci
 
 ```bash
 git clone https://github.com/xth3usx/easyap.git
-cd easyap
-pip install -r requirements.txt
+
 ```
 
 ## 📦 Downloads Diretos
