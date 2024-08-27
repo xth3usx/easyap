@@ -5,8 +5,10 @@ import time
 import pyfiglet
 import signal
 import subprocess
+import os
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -20,6 +22,11 @@ from utils import *
 from config import URL_ADMIN_ROUTER, SENHA_ADMIN_ROUTER, SENHA_GESTAO_SSID, \
                     NOME_SSID_2G, NOME_SSID_5G, MASCARA_SUBREDE, GATEWAY_PADRAO, \
                     DNS_PRIMARIO, DNS_SECUNDARIO, NOME_GRUPO_ISOLAMENTO
+
+
+
+
+
  
  # Encerrando processos do chromedriver ou navegador chrome
 def close_chrome_processes():
@@ -40,10 +47,6 @@ sti_art = pyfiglet.figlet_format("STI", font="slant")
 # Exibindo o texto estilizado
 print(sti_art)
 
-start_time = time.time()
-start_local_time = time.localtime(start_time)
-print(f"Início: {time.strftime('%H:%M:%S', start_local_time)}")
-
 # Capturando informações do usuário
 def gerar_identificador():
     while True:
@@ -52,14 +55,8 @@ def gerar_identificador():
         if 1 <= len(numero) <= 3 and numero.isdigit():
             numero_formatado = numero.zfill(4)
             
-            while True:
-                headless = input("Deseja rodar o script em modo headless? (s/n): ").strip().lower()
-                if headless == "s":
-                    break
-                elif headless == "n":
-                    break
-                else:
-                    print("Entrada inválida. Por favor, digite 's' para sim ou 'n' para não.")
+            # Definindo o modo gráfico como padrão
+            headless = False  # Garante que o navegador será exibido
             
             # Preparar as informações para retorno
             etiqueta = f"Etiqueta: AP{numero_formatado}"
@@ -114,6 +111,10 @@ num_pad_mapping = {
     "8": Keys.NUMPAD8,
     "9": Keys.NUMPAD9,
 }
+
+start_time = time.time()
+start_local_time = time.localtime(start_time)
+print(f"Início: {time.strftime('%H:%M:%S', start_local_time)}")
 
 # Impressão de infomações básicas de configuração
 print("Aguarde, o ambiente está sendo configurado...")
