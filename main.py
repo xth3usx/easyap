@@ -16,13 +16,11 @@ from selenium.webdriver.common.keys import Keys
 from datetime import datetime
 from art import text2art
 from html import gerar_html
-from config import ROUTER_ADMIN_URL, ROUTER_ADMIN_PASSWORD, SSID_MANAGEMENT_PASSWORD, \
-                    SSID_NAME_2G, SSID_NAME_5G, SUBNET_MASK, DEFAULT_GATEWAY, \
-                    PRIMARY_DNS, SECONDARY_DNS, ISOLATION_GROUP_NAME
-
+from utils import *
 from config import URL_ADMIN_ROUTER, SENHA_ADMIN_ROUTER, SENHA_GESTAO_SSID, \
                     NOME_SSID_2G, NOME_SSID_5G, MASCARA_SUBREDE, GATEWAY_PADRAO, \
                     DNS_PRIMARIO, DNS_SECUNDARIO, NOME_GRUPO_ISOLAMENTO
+
 
 
 # Encerrando processos do chromedriver ou navegador chrome
@@ -78,66 +76,26 @@ def gerar_identificador():
 
 numero, etiqueta, ssid1, ssid2, novo_ip, nome_completo_ap = gerar_identificador()
 
-# Impressão de infomações básicas de configuração
-print("Aguarde, o ambiente está sendo configurado...")
+# Captura o endereço IP da máscara de sub-rede em octetos
+mask1, mask2, mask3, mask4 = processar_mascara_subrede(MASCARA_SUBREDE)
 
-#SUBNET_MASK
-#DEFAULT_GATEWAY
-#PRIMARY_DNS
-#SECONDARY_DNS
-#ISOLATION_GROUP_NAME
+# Captura o endereço IP do Gateway em octetos
+gtw1, gtw2, gtw3, gtw4 = processar_gateway_padrao(GATEWAY_PADRAO)
 
-# Defina os octetos do IP
+# Captura o endereço IP do DNS primário em octetos
+dns1_1, dns1_2, dns1_3, dns1_4 = processar_dns_primario(DNS_PRIMARIO)
+
+# Captura o endereço IP do DNS secundário em octetos
+dns2_1, dns2_2, dns2_3, dns2_4 = processar_dns_secundario(DNS_SECUNDARIO)
+
+# Define os octetos do IP
 oct1 = 172
 oct2 = 24
 oct3 = 108
-oct4 = numero # A variável número será o valor apturado com base no que o usuário digitou
+oct4 = numero # A variável será o valor capturado com base no que o usuário digitou
 
 # IP formatado
 ip = f"{oct1}.{oct2}.{oct3}.{oct4}"
-
-mask = SUBNET_MASK.split('.')
-
-# Verificar se a entrada possui exatamente 4 octetos
-if len(mask) == 4:
-    # Converter cada octeto para inteiro
-    mask11, mask22, mask33, mask44 = [int(mask) for mask in mask]
-    
-    # Verificar se cada octeto está no intervalo válido (0 a 255)
-    if all(0 <= mask <= 255 for mask in [mask11, mask22, mask33, mask44]):
-        print(f"Máscara de sub-rede capturada:")
-        print(f"Octeto 1: {mask11}")
-        print(f"Octeto 2: {mask22}")
-        print(f"Octeto 3: {mask33}")
-        print(f"Octeto 4: {mask44}")
-    else:
-        print("Cada octeto deve estar no intervalo de 0 a 255.")
-else:
-    print("Máscara de sub-rede inválida. Certifique-se de que está no formato xxx.xxx.xxx.xxx.")
-
-# Máscara de Sub-rede:
-mask1 = 255
-mask2 = 255
-mask3 = 254
-mask4 = 0
-
-# Gateway
-gtw1 = 172
-gtw2 = 24
-gtw3 = 108
-gtw4 = 1
-
-# DNS Primário
-dns1_1 = 200
-dns1_2 = 20
-dns1_3 = 0
-dns1_4 = 18
-
-# DNS Secundário
-dns2_1 = 200
-dns2_2 = 20
-dns2_3 = 10
-dns2_4 = 17
 
 # Converte o número para string e separa os dígitos
 oct4_str = str(oct4)
@@ -159,6 +117,9 @@ num_pad_mapping = {
     "9": Keys.NUMPAD9,
 }
 
+# Impressão de infomações básicas de configuração
+print("Aguarde, o ambiente está sendo configurado...")
+
 # Configura o serviço para o ChromeDriver
 servico = Service(ChromeDriverManager().install())
 
@@ -178,21 +139,21 @@ options.add_argument('--disable-infobars')  # Desabilita a barra de informaçõe
 navegador = webdriver.Chrome(service=servico, options=options)
 
 try:
-    navegador.get(f"http://{ROUTER_ADMIN_URL}/")
-    print(f"'{ROUTER_ADMIN_URL}' acessado com sucesso.")
+    navegador.get(f"http://{URL_ADMIN_ROUTER}/")
+    print(f"'{URL_ADMIN_ROUTER}' acessado com sucesso.")
 
     time.sleep(0.2)
 
     WebDriverWait(navegador, 2).until(
         EC.presence_of_element_located((By.XPATH, '//*[@id="pc-setPwd-new"]'))
-    ).send_keys(f'{ROUTER_ADMIN_PASSWORD}')
+    ).send_keys(f'{SENHA_ADMIN_ROUTER}')
     print("Senha preenchida com sucesso no primeiro campo.")
 
     time.sleep(0.2)
 
     WebDriverWait(navegador, 20).until(
         EC.presence_of_element_located((By.XPATH, '//*[@id="pc-setPwd-confirm"]'))
-    ).send_keys(f'{ROUTER_ADMIN_PASSWORD}')
+    ).send_keys(f'{SENHA_ADMIN_ROUTER}')
     print("Senha preenchida com sucesso no segundo campo.")
 
     time.sleep(0.2)
@@ -310,9 +271,9 @@ try:
 
     time.sleep(0.2)
 
-    print(f"Tentando acessar {ROUTER_ADMIN_URL}")
-    navegador.get(f"http://{ROUTER_ADMIN_URL}/")
-    print(f"Acesso à {ROUTER_ADMIN_URL} realizado novamente com sucesso.")
+    print(f"Tentando acessar {URL_ADMIN_ROUTER}")
+    navegador.get(f"http://{URL_ADMIN_ROUTER}/")
+    print(f"Acesso à {URL_ADMIN_ROUTER} realizado novamente com sucesso.")
 
     time.sleep(0.2)
 
@@ -419,9 +380,9 @@ try:
 
     time.sleep(0.2)   
     
-    print(f"Tentando acessar {ROUTER_ADMIN_URL}")
-    navegador.get(f"http://{ROUTER_ADMIN_URL}/")
-    print(f"Acesso à {ROUTER_ADMIN_URL} realizado novamente com sucesso.")
+    print(f"Tentando acessar {URL_ADMIN_ROUTER}")
+    navegador.get(f"http://{URL_ADMIN_ROUTER}/")
+    print(f"Acesso à {URL_ADMIN_ROUTER} realizado novamente com sucesso.")
 
     time.sleep(0.2)   
 
@@ -484,7 +445,7 @@ try:
     element = WebDriverWait(navegador, 20).until(
         EC.presence_of_element_located((By.XPATH, '//*[@id="passwd_vap0_2g"]'))
     )
-    element.send_keys(SSID_MANAGEMENT_PASSWORD)  # Coloca senha de SSID de gerência
+    element.send_keys(SENHA_GESTAO_SSID)  # Coloca senha de SSID de gerência
     print("Senha de SSID de gerência adcionado com sucesso.")
 
     time.sleep(0.2)   
@@ -501,9 +462,9 @@ try:
 
     time.sleep(0.2)
 
-    print(f"Tentando acessar {ROUTER_ADMIN_URL}")
-    navegador.get(f"http://{ROUTER_ADMIN_URL}/")
-    print(f"Acesso à {ROUTER_ADMIN_URL} realizado novamente com sucesso.")
+    print(f"Tentando acessar {URL_ADMIN_ROUTER}")
+    navegador.get(f"http://{URL_ADMIN_ROUTER}/")
+    print(f"Acesso à {URL_ADMIN_ROUTER} realizado novamente com sucesso.")
 
     time.sleep(0.2)   
 
@@ -550,7 +511,7 @@ try:
     element = WebDriverWait(navegador, 20).until(
         EC.presence_of_element_located((By.XPATH, '//*[@id="ssid"]'))
     )
-    element.send_keys(f'{SSID_NAME_2G}') # Colocar SSID texto "eduroam"
+    element.send_keys(f'{NOME_SSID_2G}') # Colocar SSID texto "eduroam"
     print("Texto SSID 'eduroam' adcionado.")
 
     time.sleep(0.2)   
@@ -579,8 +540,8 @@ try:
 
     time.sleep(0.2)   
 
-    print(f"Tentando acessar {ROUTER_ADMIN_URL}")
-    navegador.get(f"http://{ROUTER_ADMIN_URL}/")
+    print(f"Tentando acessar {URL_ADMIN_ROUTER}")
+    navegador.get(f"http://{URL_ADMIN_ROUTER}/")
     print("Página acessada com sucesso.")
 
     time.sleep(0.2)   
@@ -636,7 +597,7 @@ try:
     element = WebDriverWait(navegador, 20).until(
         EC.presence_of_element_located((By.XPATH, '//*[@id="ssid"]'))
     )
-    element.send_keys(f'{SSID_NAME_5G}') # Colocar SSID texto "eduroam"
+    element.send_keys(f'{NOME_SSID_5G}') # Colocar SSID texto "eduroam"
     print("Texto SSID 'eduroam' colocado.")
 
     time.sleep(0.2)   
@@ -665,8 +626,8 @@ try:
 
     time.sleep(0.2)   
 
-    print(f"Tentando acessar {ROUTER_ADMIN_URL}")
-    navegador.get(f"http://{ROUTER_ADMIN_URL}/")
+    print(f"Tentando acessar {URL_ADMIN_ROUTER}")
+    navegador.get(f"http://{URL_ADMIN_ROUTER}/")
     print("Página acessada com sucesso.")
 
     time.sleep(0.2)   
@@ -719,8 +680,8 @@ try:
 
     time.sleep(3)
 
-    print(f"Tentando acessar {ROUTER_ADMIN_URL}")
-    navegador.get(f"http://{ROUTER_ADMIN_URL}/")
+    print(f"Tentando acessar {URL_ADMIN_ROUTER}")
+    navegador.get(f"http://{URL_ADMIN_ROUTER}/")
     print("Página acessada com sucesso.")
 
     time.sleep(0.2)
@@ -805,8 +766,8 @@ try:
 
     time.sleep(0.2)
      
-    print(f"Tentando acessar {ROUTER_ADMIN_URL}")
-    navegador.get(f"http://{ROUTER_ADMIN_URL}/")
+    print(f"Tentando acessar {URL_ADMIN_ROUTER}")
+    navegador.get(f"http://{URL_ADMIN_ROUTER}/")
     print("Página acessada com sucesso.")
 
     time.sleep(0.2)       
@@ -1134,8 +1095,8 @@ try:
 
     time.sleep(0.2)   
 
-    print(f"Tentando acessar {ROUTER_ADMIN_URL}")
-    navegador.get(f"http://{ROUTER_ADMIN_URL}/")
+    print(f"Tentando acessar {URL_ADMIN_ROUTER}")
+    navegador.get(f"http://{URL_ADMIN_ROUTER}/")
     print("Página acessada com sucesso.")
 
     time.sleep(0.2)
@@ -1183,7 +1144,7 @@ try:
     element = WebDriverWait(navegador, 20).until(
         EC.presence_of_element_located((By.XPATH, '//*[@id="groupName"]')) # Adicionar um Novo Grupo
     )
-    element.send_keys(f"{ISOLATION_GROUP_NAME}") 
+    element.send_keys(f"{NOME_GRUPO_ISOLAMENTO}") 
     print("Adicionar um Novo Grupo.")
 
     time.sleep(0.2)
@@ -1250,8 +1211,8 @@ try:
     print(f"Tempo total gasto: {total_time:.2f} segundos")
 
     '''
-    print(f"Tentando acessar {ROUTER_ADMIN_URL}")
-    navegador.get(f"http://{ROUTER_ADMIN_URL}/")
+    print(f"Tentando acessar {URL_ADMIN_ROUTER}")
+    navegador.get(f"http://{URL_ADMIN_ROUTER}/")
     print("Página acessada com sucesso.")
     '''
 

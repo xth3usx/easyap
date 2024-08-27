@@ -1,21 +1,21 @@
 # Parâmetros de Configuração
 
 # Acesso Inicial
-ROUTER_ADMIN_URL = '192.168.0.1'
-ROUTER_ADMIN_PASSWORD = '12345678'
+URL_ADMIN_ROUTER = '192.168.0.1'
+SENHA_ADMIN_ROUTER = '12345678'
 
 # Multi-SSID
-SSID_MANAGEMENT_PASSWORD = '12345678' # Mínimo de 8 caracteres (P/ criptografia AES)
+SENHA_GESTAO_SSID = '12345678' # Mínimo de 8 caracteres (P/ criptografia AES)
 
 # Configurações Wireless / Nome de Rede (SSID)
-SSID_NAME_2G = 'eduroam'
-SSID_NAME_5G = 'eduroam'
+NOME_SSID_2G = 'eduroam'
+NOME_SSID_5G = 'eduroam'
 
 # Configuração Ethernet
-SUBNET_MASK = '255.255.254.0'
-DEFAULT_GATEWAY = '172.24.108.1'
-PRIMARY_DNS = '200.20.0.18'
-SECONDARY_DNS = '200.20.10.17'
+MASCARA_SUBREDE = '255.255.254.0'
+GATEWAY_PADRAO = '172.24.108.1'
+DNS_PRIMARIO = '200.20.0.18'
+DNS_SECUNDARIO = '200.20.10.17'
 
 # Nome do Grupo de Isolamento
-ISOLATION_GROUP_NAME = 'desabilitados'
+NOME_GRUPO_ISOLAMENTO = 'desabilitados'
