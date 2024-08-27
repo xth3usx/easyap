@@ -20,10 +20,8 @@ from utils import *
 from config import URL_ADMIN_ROUTER, SENHA_ADMIN_ROUTER, SENHA_GESTAO_SSID, \
                     NOME_SSID_2G, NOME_SSID_5G, MASCARA_SUBREDE, GATEWAY_PADRAO, \
                     DNS_PRIMARIO, DNS_SECUNDARIO, NOME_GRUPO_ISOLAMENTO
-
-
-
-# Encerrando processos do chromedriver ou navegador chrome
+ 
+ # Encerrando processos do chromedriver ou navegador chrome
 def close_chrome_processes():
     if platform.system() == "Windows":
         # Comandos para Windows
@@ -92,7 +90,7 @@ dns2_1, dns2_2, dns2_3, dns2_4 = processar_dns_secundario(DNS_SECUNDARIO)
 oct1 = 172
 oct2 = 24
 oct3 = 108
-oct4 = numero # A variável será o valor capturado com base no que o usuário digitou
+oct4 = numero # A variável armazenará o valor obtido a partir da entrada fornecida pelo usuário
 
 # IP formatado
 ip = f"{oct1}.{oct2}.{oct3}.{oct4}"
