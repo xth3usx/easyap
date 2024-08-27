@@ -22,11 +22,6 @@ from utils import *
 from config import URL_ADMIN_ROUTER, SENHA_ADMIN_ROUTER, SENHA_GESTAO_SSID, \
                     NOME_SSID_2G, NOME_SSID_5G, MASCARA_SUBREDE, GATEWAY_PADRAO, \
                     DNS_PRIMARIO, DNS_SECUNDARIO, NOME_GRUPO_ISOLAMENTO
-
-
-
-
-
  
  # Encerrando processos do chromedriver ou navegador chrome
 def close_chrome_processes():

@@ -1,1 +1,2 @@
 Data: 2024-08-27 11:56:15.757826, Etiqueta: AP0067, SSID de Gerencia: Gerência0067-Acesso_restrito, Nome completo do AP: ap0067, IP: 172.24.108.67, MAC: 00:31:92:13:14:10 
+Data: 2024-08-27 12:19:09.352904, Etiqueta: AP0067, SSID de Gerencia: Gerência0067-Acesso_restrito, Nome completo do AP: ap0067, IP: 172.24.108.67, MAC: 00:31:92:13:14:10 
