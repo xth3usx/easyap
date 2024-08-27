@@ -1,7 +1,4 @@
-from config import URL_ADMIN_ROUTER, SENHA_ADMIN_ROUTER, SENHA_GESTAO_SSID, \
-                    NOME_SSID_2G, NOME_SSID_5G, MASCARA_SUBREDE, GATEWAY_PADRAO, \
-                    DNS_PRIMARIO, DNS_SECUNDARIO, NOME_GRUPO_ISOLAMENTO
-
+from config import MASCARA_SUBREDE, GATEWAY_PADRAO,DNS_PRIMARIO, DNS_SECUNDARIO
 
 def processar_mascara_subrede(MASCARA_SUBREDE):
     # Dividir a máscara de sub-rede em octetos
