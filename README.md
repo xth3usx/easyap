@@ -62,7 +62,3 @@ Contribuições são sempre bem-vindas! Se você deseja contribuir com o projeto
 2. Crie uma branch para suas modificações (`git checkout -b minha-feature`).
 3. Envie suas mudanças (`git commit -am 'Adiciona nova feature'`).
 4. Envie um pull request.
-
-## 📝 Licença
-
-Este projeto é distribuído sob a licença MIT. Consulte o arquivo `LICENSE` para mais detalhes.
