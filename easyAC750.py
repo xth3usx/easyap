@@ -1208,12 +1208,6 @@ try:
     total_time = end_time - start_time
     print(f"Tempo total gasto: {total_time:.2f} segundos")
 
-    '''
-    print(f"Tentando acessar {URL_ADMIN_ROUTER}")
-    navegador.get(f"http://{URL_ADMIN_ROUTER}/")
-    print("Página acessada com sucesso.")
-    '''
-
     # Criando uma página HTML para exibir no navegador
     end_time = time.time()
     total_time = end_time - start_time
@@ -1237,11 +1231,10 @@ try:
     print("Aguarde, gerando html...")
 
     # Injetando o conteúdo HTML diretamente no navegador
-    #navegador.execute_script(f"document.write({repr(html_content)});")
     navegador.execute_script(f"document.write({repr(gerar_html(ip,mac,ftime))});")
 
 finally:
     print("O navegador já pode ser fechado.")
-    time.sleep(100)   
+    time.sleep(40)   
     navegador.quit()
     print("Navegador fechado.")
