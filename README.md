@@ -81,7 +81,7 @@ Antes de executar o script, certifique-se de que todos os navegadores Chrome est
 
 Se preferir, você pode baixar os arquivos diretamente nos formatos comprimidos:
 
-- [Baixar como ZIP](https://github.com/seu_usuario/seu_repositorio/releases/download/v1.0.0/seu_arquivo.zip)
+- [Baixar como ZIP](https://github.com/xth3usx/easyap/blob/main/EasyAPConfig.zip)
 - [Baixar como .tar.gz](https://github.com/seu_usuario/seu_repositorio/releases/download/v1.0.0/seu_arquivo.tar.gz)
 
 
