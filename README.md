@@ -90,7 +90,7 @@ A estrutura do projeto está organizada da seguinte forma:
 - **easyAC750.py**: Script principal de automação.
 - **config.py**: Arquivo de configuração contendo parâmetros ajustáveis.
 - **utils.py**: Funções auxiliares para processamento de IPs e máscaras de sub-rede.
-- **html.py**: Módulo responsável pela geração dinâmica de uma página HTML que confirma a conclusão da instalação do dispositivo, exibindo informações detalhadas sobre o processo finalizado, como IP, MAC e tempo gasto.
+- **html.py**: Responsável pela geração dinâmica de uma página HTML que confirma a conclusão da instalação do dispositivo, exibindo informações detalhadas sobre o processo finalizado, como IP, MAC e tempo gasto.
 
 ## 🛠 Uso
 
