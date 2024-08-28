@@ -41,7 +41,7 @@ sti_art = pyfiglet.figlet_format("STI", font="slant")
 
 # Exibindo o texto estilizado
 print(sti_art)
-
+'''
 # Capturando informações do usuário
 def gerar_identificador():
     while True:
@@ -50,8 +50,26 @@ def gerar_identificador():
         if 1 <= len(numero) <= 3 and numero.isdigit():
             numero_formatado = numero.zfill(4)
             
-            # Definindo o modo gráfico como padrão
-            headless = False  # Garante que o navegador será exibido
+            # Perguntar ao usuário se deseja verificar uma nova versão do ChromeDriver
+            verificar_nova_versao = input("Deseja verificar uma nova versão do ChromeDriver? (s/n): ").strip().lower()
+
+            if verificar_nova_versao == 's':
+                # Executar com ChromeDriverManager para baixar e instalar a versão mais recente
+                servico = Service(ChromeDriverManager().install())
+            else:
+                # Executar com o ChromeDriver local
+                caminho_executavel = "./chromedriver.exe"  # Caminho para o chromedriver local
+                servico = Service(caminho_executavel)
+
+            # Configurações do ChromeOptions
+            options = webdriver.ChromeOptions()
+            options.add_argument('--no-sandbox')  # Necessário em alguns ambientes
+            options.add_argument('--disable-dev-shm-usage')  # Usar /tmp em vez de /dev/shm
+            options.add_argument('--disable-extensions')  # Desabilitar extensões
+            options.add_argument('--disable-infobars')  # Desabilitar barra de informações
+
+            # Inicializar o navegador com o serviço configurado
+            driver = webdriver.Chrome(service=servico, options=options)
             
             # Preparar as informações para retorno
             etiqueta = f"Etiqueta: AP{numero_formatado}"
@@ -60,11 +78,64 @@ def gerar_identificador():
             novo_ip = f"NOVO IP Gerência: 172.24.108.{int(numero)}"
             nome_completo_ap = f"Nome completo do AP: ap{numero_formatado}"
       
+            # Fechar o navegador após o uso
+            driver.quit()
+            
             return numero, etiqueta, ssid1, ssid2, novo_ip, nome_completo_ap
         else:
             print("Erro: O número do AP deve ter entre 1 e 3 dígitos. Tente novamente.")
 
+# Executa a função e obtém os valores
 numero, etiqueta, ssid1, ssid2, novo_ip, nome_completo_ap = gerar_identificador()
+'''
+
+def gerar_identificador():
+    while True:
+        numero = input("Digite o número do AP: ")
+
+        if 1 <= len(numero) <= 3 and numero.isdigit():
+            numero_formatado = numero.zfill(4)
+            
+            # Perguntar ao usuário se deseja verificar uma nova versão do ChromeDriver
+            verificar_nova_versao = input("Deseja verificar uma nova versão do ChromeDriver? (s/n): ").strip().lower()
+
+            if verificar_nova_versao == 's':
+                # Executar com ChromeDriverManager para baixar e instalar a versão mais recente
+                servico = Service(ChromeDriverManager().install())
+            else:
+                # Executar com o ChromeDriver local
+                caminho_executavel = "./chromedriver.exe"  # Caminho para o chromedriver local
+                servico = Service(caminho_executavel)
+
+            # Configurações do ChromeOptions
+            options = webdriver.ChromeOptions()
+            #options.add_argument('--headless')  # Executa o navegador em modo headless
+            options.add_argument('--disable-gpu')  # Desabilita a GPU (opcional, melhora a compatibilidade)
+            options.add_argument('--start-maximized')  # Maximiza a janela ao iniciar
+            options.add_argument("force-device-scale-factor=0.5")
+            options.add_argument("high-dpi-support=1")
+            options.add_argument('--no-sandbox')  # Desabilita o sandboxing, necessário em alguns ambientes
+            options.add_argument('--disable-dev-shm-usage')  # Usa /tmp em vez de /dev/shm para armazenamento de compartilhamento de memória (evita problemas de espaço em memória compartilhada)
+            options.add_argument('--disable-extensions')  # Desabilita extensões, que podem interferir
+            options.add_argument('--disable-infobars')  # Desabilita a barra de informações "Chrome is being controlled by automated test software"
+
+            # Retornar as informações necessárias para uso fora da função
+            return numero, servico, options, numero_formatado
+        else:
+            print("Erro: O número do AP deve ter entre 1 e 3 dígitos. Tente novamente.")
+
+# Executa a função e obtém os valores necessários
+numero, servico, options, numero_formatado = gerar_identificador()
+
+# Inicializa o navegador usando os valores retornados pela função
+navegador = webdriver.Chrome(service=servico, options=options)
+
+# Prepare as informações para uso posterior
+etiqueta = f"Etiqueta: AP{numero_formatado}"
+ssid1 = f"Identificação SSID Gerência: Gerência{numero_formatado}-Acesso_restrito"
+ssid2 = f"Gerência{numero_formatado}-Acesso_restrito"
+novo_ip = f"NOVO IP Gerência: 172.24.108.{int(numero_formatado)}"
+nome_completo_ap = f"Nome completo do AP: ap{numero_formatado}"
 
 # Captura o endereço IP da máscara de sub-rede em octetos
 mask1, mask2, mask3, mask4 = processar_mascara_subrede(MASCARA_SUBREDE)
@@ -115,8 +186,8 @@ print(f"Início: {time.strftime('%H:%M:%S', start_local_time)}")
 print("Aguarde, o ambiente está sendo configurado...")
 
 # Configura o serviço para o ChromeDriver
-servico = Service(ChromeDriverManager().install())
-
+#servico = Service(ChromeDriverManager().install())
+'''
 # Configura o Chrome para rodar em modo headless
 options = webdriver.ChromeOptions()
 #options.add_argument('--headless')  # Executa o navegador em modo headless
@@ -131,6 +202,7 @@ options.add_argument('--disable-infobars')  # Desabilita a barra de informaçõe
 
 # Inicializa o navegador em modo headless
 navegador = webdriver.Chrome(service=servico, options=options)
+'''
 
 try:
     navegador.get(f"http://{URL_ADMIN_ROUTER}/")
@@ -1231,6 +1303,6 @@ try:
 
 finally:
     print("O navegador já pode ser fechado.")
-    time.sleep(40)   
+    time.sleep(20)   
     navegador.quit()
     print("Navegador fechado.")
