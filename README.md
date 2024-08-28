@@ -13,14 +13,37 @@ Para utilizar este script, certifique-se de ter os seguintes componentes instala
 
 ## 🚀 Instalação
 
-### Clonando o Repositório
+#### Windows:
 
-Siga as instruções abaixo para clonar o repositório e instalar as dependências necessárias:
+1. **Instalar o Python 3.11.5**:
+   - Abra o PowerShell e execute o comando abaixo para baixar e instalar o Python automaticamente:
+   ```powershell
+   Invoke-WebRequest -Uri https://www.python.org/ftp/python/3.11.5/python-3.11.5-amd64.exe -OutFile python-installer.exe
+   Start-Process -FilePath "python-installer.exe" -ArgumentList "/quiet InstallAllUsers=1 PrependPath=1" -Wait
+   ```
 
-```bash
-git clone https://github.com/xth3usx/easyap.git
+2. **Garantir que o pip está instalado e atualizado**:
+   ```powershell
+   python -m ensurepip --upgrade
+   ```
 
-```
+3. **Instalar as dependências (Selenium e ChromeDriver Auto Installer)**:
+   ```powershell
+   pip install selenium
+   pip install webdriver-manager
+   pip install pyfiglet
+   pip install art
+   pip install chromedriver-autoinstaller
+   ```
+
+4. **Clonar o repositório e instalar as dependências adicionais**:
+   ```powershell
+   git clone https://github.com/xth3usx/easyap.git
+   ```
+
+### Configurando o Ambiente
+
+Antes de executar o script, certifique-se de que todos os navegadores Chrome estejam fechados. Isso é necessário para garantir que o Selenium WebDriver possa iniciar e controlar o navegador sem interrupções.
 
 ## 📦 Downloads Diretos
 

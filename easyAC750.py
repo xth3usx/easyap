@@ -6,6 +6,7 @@ import pyfiglet
 import signal
 import subprocess
 import os
+import shutil
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
@@ -41,53 +42,19 @@ sti_art = pyfiglet.figlet_format("STI", font="slant")
 
 # Exibindo o texto estilizado
 print(sti_art)
-'''
-# Capturando informações do usuário
-def gerar_identificador():
-    while True:
-        numero = input("Digite o número do AP: ")
 
-        if 1 <= len(numero) <= 3 and numero.isdigit():
-            numero_formatado = numero.zfill(4)
-            
-            # Perguntar ao usuário se deseja verificar uma nova versão do ChromeDriver
-            verificar_nova_versao = input("Deseja verificar uma nova versão do ChromeDriver? (s/n): ").strip().lower()
-
-            if verificar_nova_versao == 's':
-                # Executar com ChromeDriverManager para baixar e instalar a versão mais recente
-                servico = Service(ChromeDriverManager().install())
-            else:
-                # Executar com o ChromeDriver local
-                caminho_executavel = "./chromedriver.exe"  # Caminho para o chromedriver local
-                servico = Service(caminho_executavel)
-
-            # Configurações do ChromeOptions
-            options = webdriver.ChromeOptions()
-            options.add_argument('--no-sandbox')  # Necessário em alguns ambientes
-            options.add_argument('--disable-dev-shm-usage')  # Usar /tmp em vez de /dev/shm
-            options.add_argument('--disable-extensions')  # Desabilitar extensões
-            options.add_argument('--disable-infobars')  # Desabilitar barra de informações
-
-            # Inicializar o navegador com o serviço configurado
-            driver = webdriver.Chrome(service=servico, options=options)
-            
-            # Preparar as informações para retorno
-            etiqueta = f"Etiqueta: AP{numero_formatado}"
-            ssid1 = f"Identificação SSID Gerência: Gerência{numero_formatado}-Acesso_restrito"
-            ssid2 = f"Gerência{numero_formatado}-Acesso_restrito"
-            novo_ip = f"NOVO IP Gerência: 172.24.108.{int(numero)}"
-            nome_completo_ap = f"Nome completo do AP: ap{numero_formatado}"
-      
-            # Fechar o navegador após o uso
-            driver.quit()
-            
-            return numero, etiqueta, ssid1, ssid2, novo_ip, nome_completo_ap
-        else:
-            print("Erro: O número do AP deve ter entre 1 e 3 dígitos. Tente novamente.")
-
-# Executa a função e obtém os valores
-numero, etiqueta, ssid1, ssid2, novo_ip, nome_completo_ap = gerar_identificador()
-'''
+def baixar_chromedriver_no_diretorio_atual():
+    # Obter o diretório atual onde o script está sendo executado
+    diretorio_atual = os.path.dirname(os.path.abspath(__file__))
+    
+    # Baixar e instalar o ChromeDriver no diretório padrão do webdriver_manager
+    caminho_do_chromedriver = ChromeDriverManager().install()
+    
+    # Mover o ChromeDriver para o diretório atual
+    chromedriver_novo_caminho = os.path.join(diretorio_atual, "chromedriver.exe")
+    shutil.copyfile(caminho_do_chromedriver, chromedriver_novo_caminho)
+    
+    return chromedriver_novo_caminho
 
 def gerar_identificador():
     while True:
@@ -100,26 +67,26 @@ def gerar_identificador():
             verificar_nova_versao = input("Deseja verificar uma nova versão do ChromeDriver? (s/n): ").strip().lower()
 
             if verificar_nova_versao == 's':
-                # Executar com ChromeDriverManager para baixar e instalar a versão mais recente
-                servico = Service(ChromeDriverManager().install())
+                # Baixar o ChromeDriver no diretório atual
+                caminho_executavel = baixar_chromedriver_no_diretorio_atual()
             else:
-                # Executar com o ChromeDriver local
-                caminho_executavel = "./chromedriver.exe"  # Caminho para o chromedriver local
-                servico = Service(caminho_executavel)
+                # Usar o ChromeDriver local
+                caminho_executavel = "./chromedriver.exe"
+
+            # Configurar o serviço para o ChromeDriver
+            servico = Service(caminho_executavel)
 
             # Configurações do ChromeOptions
             options = webdriver.ChromeOptions()
-            #options.add_argument('--headless')  # Executa o navegador em modo headless
-            options.add_argument('--disable-gpu')  # Desabilita a GPU (opcional, melhora a compatibilidade)
-            options.add_argument('--start-maximized')  # Maximiza a janela ao iniciar
+            options.add_argument('--disable-gpu')
+            options.add_argument('--start-maximized')
             options.add_argument("force-device-scale-factor=0.5")
             options.add_argument("high-dpi-support=1")
-            options.add_argument('--no-sandbox')  # Desabilita o sandboxing, necessário em alguns ambientes
-            options.add_argument('--disable-dev-shm-usage')  # Usa /tmp em vez de /dev/shm para armazenamento de compartilhamento de memória (evita problemas de espaço em memória compartilhada)
-            options.add_argument('--disable-extensions')  # Desabilita extensões, que podem interferir
-            options.add_argument('--disable-infobars')  # Desabilita a barra de informações "Chrome is being controlled by automated test software"
+            options.add_argument('--no-sandbox')
+            options.add_argument('--disable-dev-shm-usage')
+            options.add_argument('--disable-extensions')
+            options.add_argument('--disable-infobars')
 
-            # Retornar as informações necessárias para uso fora da função
             return numero, servico, options, numero_formatado
         else:
             print("Erro: O número do AP deve ter entre 1 e 3 dígitos. Tente novamente.")
@@ -1303,6 +1270,6 @@ try:
 
 finally:
     print("O navegador já pode ser fechado.")
-    time.sleep(20)   
+    time.sleep(40)   
     navegador.quit()
     print("Navegador fechado.")
