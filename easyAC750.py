@@ -152,25 +152,6 @@ print(f"Início: {time.strftime('%H:%M:%S', start_local_time)}")
 # Impressão de infomações básicas de configuração
 print("Aguarde, o ambiente está sendo configurado...")
 
-# Configura o serviço para o ChromeDriver
-#servico = Service(ChromeDriverManager().install())
-'''
-# Configura o Chrome para rodar em modo headless
-options = webdriver.ChromeOptions()
-#options.add_argument('--headless')  # Executa o navegador em modo headless
-options.add_argument('--disable-gpu')  # Desabilita a GPU (opcional, melhora a compatibilidade)
-options.add_argument('--start-maximized')  # Maximiza a janela ao iniciar
-options.add_argument("force-device-scale-factor=0.5")
-options.add_argument("high-dpi-support=1")
-options.add_argument('--no-sandbox')  # Desabilita o sandboxing, necessário em alguns ambientes
-options.add_argument('--disable-dev-shm-usage')  # Usa /tmp em vez de /dev/shm para armazenamento de compartilhamento de memória (evita problemas de espaço em memória compartilhada)
-options.add_argument('--disable-extensions')  # Desabilita extensões, que podem interferir
-options.add_argument('--disable-infobars')  # Desabilita a barra de informações "Chrome is being controlled by automated test software"
-
-# Inicializa o navegador em modo headless
-navegador = webdriver.Chrome(service=servico, options=options)
-'''
-
 try:
     navegador.get(f"http://{URL_ADMIN_ROUTER}/")
     print(f"'{URL_ADMIN_ROUTER}' acessado com sucesso.")
@@ -1223,7 +1204,7 @@ try:
     time.sleep(0.2)
 
     ############################
-    '''    
+       
     element = WebDriverWait(navegador, 20).until(
         EC.element_to_be_clickable((By.XPATH, '//*[@id="editOK"]')) # Salvar alterações
     )
@@ -1231,7 +1212,7 @@ try:
     print("Salvar acionado.")
 
     time.sleep(0.2)        
-    '''
+    
     ############################
 
     # Horário de término
