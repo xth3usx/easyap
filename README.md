@@ -68,11 +68,6 @@ Para utilizar este script, certifique-se de ter os seguintes componentes instala
    python3 -m pip install chromedriver-autoinstaller
 
 
-### Clonando o Repositório
-   ```powershell
-   git clone https://github.com/xth3usx/easyap.git
-   ```
-
 ### Configurando o Ambiente
 
 Antes de executar o script, certifique-se de que todos os navegadores Chrome estejam fechados. Isso é necessário para garantir que o Selenium WebDriver possa iniciar e controlar o navegador sem interrupções.
