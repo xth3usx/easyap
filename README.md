@@ -55,17 +55,17 @@ Para utilizar este script, certifique-se de ter os seguintes componentes instala
 
 2. **Garantir que o pip está instalado e atualizado**:
    ```bash
-   python3.11 -m ensurepip --upgrade
-   python3.11 -m pip install --upgrade pip
+   python3 -m ensurepip --upgrade
+   python3 -m pip install --upgrade pip
    ```
 
 3. **Instalar as dependências (Selenium e ChromeDriver Auto Installer)**:
    ```bash
-   python3.11 -m pip install selenium
-   python3.11 -m pip install webdriver-manager
-   python3.11 -m pip install pyfiglet
-   python3.11 -m pip install art
-   python3.11 -m pip install chromedriver-autoinstaller
+   python3 -m pip install selenium
+   python3 -m pip install webdriver-manager
+   python3 -m pip install pyfiglet
+   python3 -m pip install art
+   python3 -m pip install chromedriver-autoinstaller
 
 
 ### Clonando o Repositório
