@@ -82,6 +82,7 @@ Antes de executar o script, certifique-se de que todos os navegadores Chrome est
 Se preferir, você pode baixar os arquivos diretamente nos formatos comprimidos:
 
 - [Baixar como ZIP](#)
+- [Baixar como .tar.gz](#)
 
 ## 🗂 Estrutura do Projeto
 
