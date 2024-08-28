@@ -35,8 +35,7 @@ Para utilizar este script, certifique-se de ter os seguintes componentes instala
    pip install art
    pip install chromedriver-autoinstaller
    ```
-
-4. **Clonar o repositório e instalar as dependências adicionais**:
+### Clonando o Repositório
    ```powershell
    git clone https://github.com/xth3usx/easyap.git
    ```
@@ -50,7 +49,6 @@ Antes de executar o script, certifique-se de que todos os navegadores Chrome est
 Se preferir, você pode baixar os arquivos diretamente nos formatos comprimidos:
 
 - [Baixar como ZIP](#)
-- [Baixar como TAR.GZ](#)
 
 ## 🗂 Estrutura do Projeto
 
@@ -75,12 +73,3 @@ O script realizará todas as configurações necessárias via interface web do r
 ## 📋 Log
 
 As configurações aplicadas pelo script são registradas em um arquivo de log (`log.txt`). Este log é útil para auditorias e para acompanhar as alterações realizadas durante o processo de configuração.
-
-## 🤝 Contribuição
-
-Contribuições são sempre bem-vindas! Se você deseja contribuir com o projeto, siga os passos abaixo:
-
-1. Faça um fork do projeto.
-2. Crie uma branch para suas modificações (`git checkout -b minha-feature`).
-3. Envie suas mudanças (`git commit -am 'Adiciona nova feature'`).
-4. Envie um pull request.
