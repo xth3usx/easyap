@@ -1204,14 +1204,14 @@ try:
     time.sleep(0.2)
 
     ############################
-       
+     
     element = WebDriverWait(navegador, 20).until(
         EC.element_to_be_clickable((By.XPATH, '//*[@id="editOK"]')) # Salvar alterações
     )
     element.click()
     print("Salvar acionado.")
 
-    time.sleep(0.2)        
+    time.sleep(1)        
     
     ############################
 
@@ -1248,9 +1248,17 @@ try:
 
     # Injetando o conteúdo HTML diretamente no navegador
     navegador.execute_script(f"document.write({repr(gerar_html(ip,mac,ftime))});")
+    print(destaque)
 
 finally:
     print("O navegador já pode ser fechado.")
-    time.sleep(40)   
+    print("")
+    print("##########################################")
+    print("")
+    print("Caso queira finalizar, pressione CTRL + C.")
+    print("")
+    print("##########################################")
+    print("")
+    time.sleep(50)   
     navegador.quit()
     print("Navegador fechado.")
