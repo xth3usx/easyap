@@ -35,6 +35,39 @@ Para utilizar este script, certifique-se de ter os seguintes componentes instala
    pip install art
    pip install chromedriver-autoinstaller
    ```
+
+### Linux:
+
+1. **Instalar o Python 3.11.5**:
+   - Abra o terminal e execute os seguintes comandos para baixar, compilar e instalar o Python 3.11.5:
+
+   ```bash
+   sudo apt update
+   sudo apt install -y build-essential libssl-dev zlib1g-dev libncurses5-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+
+   wget https://www.python.org/ftp/python/3.11.5/Python-3.11.5.tgz
+   tar -xvf Python-3.11.5.tgz
+   cd Python-3.11.5
+   ./configure --enable-optimizations
+   make -j "$(nproc)"
+   sudo make altinstall
+   ```
+
+2. **Garantir que o pip está instalado e atualizado**:
+   ```bash
+   python3.11 -m ensurepip --upgrade
+   python3.11 -m pip install --upgrade pip
+   ```
+
+3. **Instalar as dependências (Selenium e ChromeDriver Auto Installer)**:
+   ```bash
+   python3.11 -m pip install selenium
+   python3.11 -m pip install webdriver-manager
+   python3.11 -m pip install pyfiglet
+   python3.11 -m pip install art
+   python3.11 -m pip install chromedriver-autoinstaller
+
+
 ### Clonando o Repositório
    ```powershell
    git clone https://github.com/xth3usx/easyap.git
