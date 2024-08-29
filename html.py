@@ -89,7 +89,7 @@ def gerar_html(ip,mac,ftime):
             </head>
             <body>
                 <div class="container">
-                    <h1>Configuração da primeira etapa concluída com sucesso!</h1>
+                    <h1>Configuração da primeira etapa concluída com sucesso! </h1>
                     <p>Para concluir a última etapa:</p>
                     <p><span class="step-number">1</span> Desconecte o cabo de rede da porta LAN do dispositivo.</p>
                     <p><span class="step-number">2</span> Conecte o cabo de internet à porta WAN do roteador.</p>
