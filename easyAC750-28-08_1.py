@@ -40,47 +40,8 @@ close_chrome_processes()
 # Criando texto estilizado
 sti_art = pyfiglet.figlet_format("STI", font="slant")
 
-'''
 # Exibindo o texto estilizado
 print(sti_art)
-print("=" * 50)
-print(" " * 18 + "EasyAC750 v1.0.0")
-print("=" * 50)
-print("")
-'''
-
-def clear_screen():
-    """Função para limpar a tela (compatível com Windows e Unix)."""
-    os.system('cls' if os.name == 'nt' else 'clear')
-
-def display_header():
-    """Função para exibir o cabeçalho estilizado do script."""
-    clear_screen()
-    
-    # Criando e exibindo o texto estilizado
-    sti_art = pyfiglet.figlet_format("STI", font="slant")
-    print(sti_art)
-    
-    # Exibindo a barra divisória
-    print("=" * 50)
-    
-    # Exibindo o nome do software e a versão
-    software_name = "EasyAC750"
-    version = "v1.0.0"
-    print(f"{software_name:^50}")
-    print(f"{version:^50}")
-    
-    # Exibindo a barra divisória novamente
-    print("=" * 50)
-    
-    # Exibindo a data e hora atuais
-    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    print(f"Data e Hora: {current_time}\n")
-    
-    # Pausando brevemente para efeito visual
-    time.sleep(1)
-
-display_header()
 
 def baixar_chromedriver_no_diretorio_atual():
     # Obter o diretório atual onde o script está sendo executado
@@ -97,13 +58,13 @@ def baixar_chromedriver_no_diretorio_atual():
 
 def gerar_identificador():
     while True:
-        numero = input(">> Digite o número do AP: ")
+        numero = input("Digite o número do AP: ")
 
         if 1 <= len(numero) <= 3 and numero.isdigit():
             numero_formatado = numero.zfill(4)
             
             # Perguntar ao usuário se deseja verificar uma nova versão do ChromeDriver
-            verificar_nova_versao = input(">> Deseja verificar uma nova versão do ChromeDriver? (s/n): ").strip().lower()
+            verificar_nova_versao = input("Deseja verificar uma nova versão do ChromeDriver? (s/n): ").strip().lower()
 
             if verificar_nova_versao == 's':
                 # Baixar o ChromeDriver no diretório atual
