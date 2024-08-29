@@ -1,6 +1,0 @@
-Data: 2024-08-28 12:03:18.195397, Etiqueta: AP0067, SSID de Gerencia: Gerência0067-Acesso_restrito, Nome completo do AP: ap0067, IP: 172.24.108.67, MAC: 00:31:92:13:14:10 
-Data: 2024-08-28 12:16:10.572453, Etiqueta: AP0067, SSID de Gerencia: Gerência0067-Acesso_restrito, Nome completo do AP: ap0067, IP: 172.24.108.67, MAC: 00:31:92:13:14:10 
-Data: 2024-08-28 13:58:50.537841, Etiqueta: AP0067, SSID de Gerencia: Gerência0067-Acesso_restrito, Nome completo do AP: ap0067, IP: 172.24.108.67, MAC: 00:31:92:13:14:10 
-Data: 2024-08-28 14:20:28.359149, Etiqueta: AP0067, SSID de Gerencia: Gerência0067-Acesso_restrito, Nome completo do AP: ap0067, IP: 172.24.108.67, MAC: 00:31:92:13:14:10 
-Data: 2024-08-28 14:24:47.279681, Etiqueta: AP0067, SSID de Gerencia: Gerência0067-Acesso_restrito, Nome completo do AP: ap0067, IP: 172.24.108.67, MAC: 00:31:92:13:14:10 
-Data: 2024-08-28 14:36:27.483374, Etiqueta: AP0085, SSID de Gerencia: Gerência0085-Acesso_restrito, Nome completo do AP: ap0085, IP: 172.24.108.85, MAC: 00:31:92:13:19:F5 
