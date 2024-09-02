@@ -63,22 +63,30 @@ def display_header():
     
     # Exibindo a barra divisória
     print("=" * 50)
-    
+
     # Exibindo o nome do software e a versão
     software_name = "EasyAC750"
     version = "v1.0.0"
     print(f"{software_name:^50}")
     print(f"{version:^50}")
-    
+
     # Exibindo a barra divisória novamente
     print("=" * 50)
-    
-    # Exibindo a data e hora atuais
+
+    # Exibindo a atenção antes de rodar o script
+    attention_message = (
+        "ATENÇÃO:\n"
+        "- Feche todas as janelas do navegador Chrome antes de continuar!\n"
+        "- Para encerrar o script, pressione Ctrl+C."
+    )
+    print(f"\n{attention_message:^50}\n")
+
+    # Pausando brevemente para que o usuário possa ler as mensagens
+    time.sleep(1.2)
+    # Armazenando a data e hora atuais
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    print(f"Data e Hora: {current_time}\n")
+    #print(f"Data e Hora: {current_time}\n")
     
-    # Pausando brevemente para efeito visual
-    time.sleep(1)
 
 display_header()
 
